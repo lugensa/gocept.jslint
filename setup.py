@@ -27,5 +27,6 @@ Python-unittest integration for jslint.
         'setuptools',
     ],
     extras_require=dict(test=[
+        'mock',
     ]),
 )

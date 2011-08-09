@@ -26,9 +26,12 @@ and the test class will grow a method named ``test_jslint_filename.js``.
 Requirements
 ============
 
+gocept.jslint requires Python 2.6 or later, but is not sure to run under Python
+3.
+
 gocept.jslint uses `node.js`_ to run jslint (powered by the `jslint-reporter`_
-wrapper for the original JSLint script), so you need to have node.js installed
-and the ``node`` binary available on your ``$PATH``.
+wrapper for the original JSLint script), so you need to have node.js (version
+0.3 or later) installed and the ``node`` binary available on your ``$PATH``.
 
 
 .. _node.js: http://nodejs.org/
