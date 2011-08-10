@@ -52,4 +52,4 @@ class TestCase(unittest.TestCase):
         status = job.wait()
         output, error = job.communicate()
         if status != 0:
-            self.fail('%s had jslint errors:\n%s' % (filename, output))
+            self.fail('JSLint %s:\n%s' % (filename, output))
