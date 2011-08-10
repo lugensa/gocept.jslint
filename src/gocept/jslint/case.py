@@ -18,6 +18,8 @@ class JSLintTestGenerator(type):
     @classmethod
     def _create_jslint_runner(cls, dict, filename):
         name = 'test_jslint_%s' % os.path.basename(filename)
+        if name in dict:
+            name += '_1'
         dict[name] = lambda x: x._run_jslint(filename)
 
     @classmethod
