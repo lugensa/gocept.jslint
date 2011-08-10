@@ -51,6 +51,7 @@ class TestCase(unittest.TestCase):
     options = (
         '--browser',
         '--continue',
+        '--newcap',
         '--nomen',
         '--sloppy',
         '--sub',
