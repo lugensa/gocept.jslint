@@ -11,7 +11,8 @@ import unittest
 class JSLintTestGenerator(type):
 
     def __new__(cls, name, bases, dict):
-        for filename in cls._collect_files(dict['include']):
+        for filename in cls._collect_files(
+            dict.get('include', ()), dict.get('exclude', ())):
             cls._create_jslint_runner(dict, filename)
         return type.__new__(cls, name, bases, dict)
 
@@ -23,7 +24,7 @@ class JSLintTestGenerator(type):
         dict[name] = lambda x: x._run_jslint(filename)
 
     @classmethod
-    def _collect_files(cls, include):
+    def _collect_files(cls, include, exclude):
         paths = []
         for path in include:
             package, path = path.split(':', 1)
@@ -32,7 +33,13 @@ class JSLintTestGenerator(type):
         files = []
         for path in paths:
             files.extend(glob.glob(os.path.join(path, '*.js')))
-        return files
+
+        result = []
+        for path in files:
+            basename = os.path.basename(path)
+            if basename not in exclude:
+                result.append(path)
+        return result
 
 
 class TestCase(unittest.TestCase):
@@ -40,6 +47,7 @@ class TestCase(unittest.TestCase):
     __metaclass__ = JSLintTestGenerator
 
     include = ()
+    exclude = ()
     options = (
         '--browser',
         '--continue',
