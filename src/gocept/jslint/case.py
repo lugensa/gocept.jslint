@@ -44,4 +44,10 @@ class TestCase(unittest.TestCase):
     def _run_jslint(self, filename):
         jslint = pkg_resources.resource_filename(
             'gocept.jslint.js', 'node-jslint.js')
-        subprocess.call(['node', jslint] + self.options + [filename])
+        job = subprocess.Popen(
+            ['node', jslint] + list(self.options) + [filename],
+            stdout=subprocess.PIPE)
+        status = job.wait()
+        output, error = job.communicate()
+        if status != 0:
+            self.fail('%s had jslint errors:\n%s' % (filename, output))

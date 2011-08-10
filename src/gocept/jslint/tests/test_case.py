@@ -18,10 +18,25 @@ class CollectFilesTest(unittest.TestCase):
 
 class RunTest(unittest.TestCase):
 
-    def test_runs_jslint(self):
+    def test_jslint_error_should_fail_test(self):
 
         class Example(gocept.jslint.TestCase):
             include = ('gocept.jslint.tests:fixtures',)
             options = ()
 
-        Example('test_jslint_one.js').run()
+        result = unittest.TestResult()
+        Example('test_jslint_one.js').run(result)
+        self.assertEqual(1, len(result.failures))
+        traceback = result.failures[0][1]
+        self.assertTrue(
+            "one.js:2:5:Missing 'use strict' statement" in traceback)
+
+    def test_no_jslint_error_should_pass_test(self):
+
+        class Example(gocept.jslint.TestCase):
+            include = ('gocept.jslint.tests:fixtures',)
+            options = ('--sloppy',)
+
+        result = unittest.TestResult()
+        Example('test_jslint_one.js').run(result)
+        self.assertEqual(0, len(result.failures))
