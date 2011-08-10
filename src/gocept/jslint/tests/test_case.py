@@ -15,6 +15,16 @@ class CollectFilesTest(unittest.TestCase):
         self.assertTrue(hasattr(Example, 'test_jslint_one.js'))
         self.assertTrue(hasattr(Example, 'test_jslint_two.js'))
 
+    def test_same_filename_in_multiple_directories_appends_number(self):
+
+        class Example(gocept.jslint.TestCase):
+            include = ('gocept.jslint.tests:fixtures',
+                       'gocept.jslint.tests:fixtures/second')
+
+        self.assertTrue(hasattr(Example, 'test_jslint_one.js'))
+        self.assertTrue(hasattr(Example, 'test_jslint_two.js'))
+        self.assertTrue(hasattr(Example, 'test_jslint_one.js_1'))
+
 
 class RunTest(unittest.TestCase):
 
