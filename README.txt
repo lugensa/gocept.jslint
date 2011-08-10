@@ -36,6 +36,9 @@ To use it, create a test class like this::
         '--white',
         )
 
+``exclude`` can be a list of filenames (without path) that will not be
+collected.
+
 All files ending in ``.js`` contained in each of these paths will be collected,
 and the test class will grow a method named ``test_jslint_filename.js``.
 
