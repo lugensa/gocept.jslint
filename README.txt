@@ -25,8 +25,16 @@ To use it, create a test class like this::
 ``options`` is a list of arguments that are passed to JSLint (see its
 `documentation`_ for details). The default value is::
 
-        options = ('--sloppy', '--browser', '--nomen',
-                   '--white', '--vars', '--sub')
+    options = (
+        '--browser',
+        '--continue',
+        '--nomen',
+        '--sloppy',
+        '--sub',
+        '--unparam',
+        '--vars',
+        '--white',
+        )
 
 All files ending in ``.js`` contained in each of these paths will be collected,
 and the test class will grow a method named ``test_jslint_filename.js``.

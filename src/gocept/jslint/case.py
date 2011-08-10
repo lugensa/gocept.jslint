@@ -40,8 +40,16 @@ class TestCase(unittest.TestCase):
     __metaclass__ = JSLintTestGenerator
 
     include = ()
-    options = ('--sloppy', '--browser', '--nomen',
-               '--white', '--vars', '--sub')
+    options = (
+        '--browser',
+        '--continue',
+        '--nomen',
+        '--sloppy',
+        '--sub',
+        '--unparam',
+        '--vars',
+        '--white',
+        )
 
     def _run_jslint(self, filename):
         jslint = pkg_resources.resource_filename(
