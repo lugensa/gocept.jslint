@@ -28,6 +28,7 @@ To use it, create a test class like this::
     options = (
         '--browser',
         '--continue',
+        '--newcap',
         '--nomen',
         '--sloppy',
         '--sub',
