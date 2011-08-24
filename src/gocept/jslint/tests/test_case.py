@@ -59,3 +59,14 @@ class RunTest(unittest.TestCase):
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)
         self.assertEqual(0, len(result.failures))
+
+    def test_ignored_errors_should_pass_test(self):
+
+        class Example(gocept.jslint.TestCase):
+            include = ('gocept.jslint.tests:fixtures',)
+            options = ()
+            ignore = ("Missing 'use strict' statement")
+
+        result = unittest.TestResult()
+        Example('test_jslint_one.js').run(result)
+        self.assertEqual(0, len(result.failures))
