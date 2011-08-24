@@ -59,6 +59,7 @@ class TestCase(unittest.TestCase):
         '--vars',
         '--white',
         )
+    ignore = ()
 
     def _run_jslint(self, filename):
         jslint = pkg_resources.resource_filename(
@@ -66,7 +67,21 @@ class TestCase(unittest.TestCase):
         job = subprocess.Popen(
             ['node', jslint] + list(self.options) + [filename],
             stdout=subprocess.PIPE)
-        status = job.wait()
+        job.wait()
         output, error = job.communicate()
-        if status != 0:
+        output = self._filter_ignored_errors(output)
+        if output:
             self.fail('JSLint %s:\n%s' % (filename, output))
+
+    def _filter_ignored_errors(self, output):
+        result = []
+        for line in output.splitlines():
+            ignore = False
+            for pattern in self.ignore:
+                if pattern in line:
+                    ignore = True
+                    break
+            if ignore:
+                continue
+            result.append(line)
+        return '\n'.join(result)

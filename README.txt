@@ -43,6 +43,13 @@ collected.
 All files ending in ``.js`` contained in each of these paths will be collected,
 and the test class will grow a method named ``test_jslint_filename.js``.
 
+You can ignore JSLint error by setting ``ignore`` on the test class (a list of
+substrings that are matched against each JSLint output line):
+
+    ignore = (
+        "Use a named parameter",
+        )
+
 
 .. _documentation: http://www.jslint.com/lint.html#options
 
