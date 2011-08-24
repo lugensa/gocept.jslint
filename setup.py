@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='gocept.jslint',
-    version='0.2',
+    version='0.3dev',
     author='Wolfgang Schnerring',
     author_email='ws@gocept.com',
     url='http://pypi.python.org/pypi/gocept.jslint',
