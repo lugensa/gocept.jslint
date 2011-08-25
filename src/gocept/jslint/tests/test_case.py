@@ -2,7 +2,12 @@
 # See also LICENSE.txt
 
 import gocept.jslint
-import unittest
+import sys
+
+if sys.version_info < (2, 7):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 class CollectFilesTest(unittest.TestCase):
@@ -70,3 +75,13 @@ class RunTest(unittest.TestCase):
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)
         self.assertEqual(0, len(result.failures))
+
+    def test_nodejs_not_available_should_skip(self):
+
+        class Example(gocept.jslint.TestCase):
+            node_js_command = 'doesnotexist'
+            include = ('gocept.jslint.tests:fixtures',)
+
+        result = unittest.TestResult()
+        Example('test_jslint_one.js').run(result)
+        self.assertEqual(1, len(result.skipped))
