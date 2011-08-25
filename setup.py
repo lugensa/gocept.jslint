@@ -35,5 +35,7 @@ Python-unittest integration for jslint.
     extras_require=dict(test=[
         'mock',
     ]),
+    entry_points=dict(console_scripts=[
+        'jslint = gocept.jslint.util:run_jslint',
+    ]),
 )
-

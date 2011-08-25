@@ -4,6 +4,7 @@ CHANGES
 0.3 (unreleased)
 ----------------
 
+- Add an entry point for running jslint from the command line (#9449).
 - Skip tests if node.js is not available. Skipping tests only works properly in
   Python >= 2.7, though. (#9458)
 
