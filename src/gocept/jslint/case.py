@@ -1,7 +1,6 @@
 # Copyright (c) 2011 gocept gmbh & co. kg
 # See also LICENSE.txt
 
-import glob
 import gocept.jslint.util
 import os.path
 import pkg_resources
@@ -31,14 +30,15 @@ class JSLintTestGenerator(type):
 
     @classmethod
     def _collect_files(cls, include, exclude):
-        paths = []
+        files = []
         for path in include:
             package, path = path.split(':', 1)
-            paths.append(pkg_resources.resource_filename(package, path))
-
-        files = []
-        for path in paths:
-            files.extend(glob.glob(os.path.join(path, '*.js')))
+            for filename in pkg_resources.resource_listdir(package, path):
+                basename, extension = os.path.splitext(filename)
+                if extension.lower() != '.js':
+                    continue
+                files.append(pkg_resources.resource_filename(
+                        package, os.path.join(path, filename)))
 
         result = []
         for path in files:
