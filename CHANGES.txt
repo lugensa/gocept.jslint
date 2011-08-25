@@ -1,7 +1,7 @@
 CHANGES
 =======
 
-0.3 (unreleased)
+1.0 (2011-08-25)
 ----------------
 
 - Add support for linting JS files contained in zipped eggs (#9453).
