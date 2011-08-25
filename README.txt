@@ -37,6 +37,8 @@ To use it, create a test class like this::
         '--white',
         )
 
+.. _documentation: http://www.jslint.com/lint.html#options
+
 ``exclude`` can be a list of filenames (without path) that will not be
 collected.
 
@@ -51,8 +53,6 @@ substrings that are matched against each JSLint output line):
         )
 
 
-.. _documentation: http://www.jslint.com/lint.html#options
-
 Requirements
 ============
 
@@ -62,6 +62,13 @@ gocept.jslint requires Python 2.6 or later, but is not sure to run under Python
 gocept.jslint uses `node.js`_ to run jslint (powered by the `jslint-reporter`_
 wrapper for the original JSLint script), so you need to have node.js (version
 0.3 or later) installed and the ``node`` binary available on your ``$PATH``.
+
+You can customize the name of the node.js binary by setting ``node_js_command``
+on the TestCase.
+
+gocept.jslint also provides a command-line script to run jslint, for
+convenience. There you can customize the name of the node binary by setting the
+environment variable ``NODE_JS_COMMAND``.
 
 
 .. _node.js: http://nodejs.org/
