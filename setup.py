@@ -2,6 +2,14 @@
 # See also LICENSE.txt
 
 from setuptools import setup, find_packages
+import sys
+
+install_requires = [
+    'setuptools',
+]
+
+if sys.version_info < (2, 7):
+    install_requires.append('unittest2')
 
 
 setup(
@@ -23,10 +31,9 @@ Python-unittest integration for jslint.
     zip_safe=False,
     license='ZPL',
     namespace_packages=['gocept'],
-    install_requires=[
-        'setuptools',
-    ],
+    install_requires=install_requires,
     extras_require=dict(test=[
         'mock',
     ]),
 )
+

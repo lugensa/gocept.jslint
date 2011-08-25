@@ -2,10 +2,16 @@
 # See also LICENSE.txt
 
 import glob
+import gocept.jslint.util
 import os.path
 import pkg_resources
 import subprocess
-import unittest
+import sys
+
+if sys.version_info < (2, 7):
+    import unittest2 as unittest
+else:
+    import unittest
 
 
 class JSLintTestGenerator(type):
@@ -46,6 +52,8 @@ class TestCase(unittest.TestCase):
 
     __metaclass__ = JSLintTestGenerator
 
+    node_js_command = 'node'
+
     include = ()
     exclude = ()
     options = (
@@ -61,11 +69,18 @@ class TestCase(unittest.TestCase):
         )
     ignore = ()
 
+    def __init__(self, *args, **kw):
+        super(TestCase, self).__init__(*args, **kw)
+        self.node_present = gocept.jslint.util.which(self.node_js_command)
+
     def _run_jslint(self, filename):
+        if not self.node_present:
+            raise unittest.SkipTest(
+                '%r not found on $PATH' % self.node_js_command)
         jslint = pkg_resources.resource_filename(
             'gocept.jslint.js', 'node-jslint.js')
         job = subprocess.Popen(
-            ['node', jslint] + list(self.options) + [filename],
+            [self.node_js_command, jslint] + list(self.options) + [filename],
             stdout=subprocess.PIPE)
         job.wait()
         output, error = job.communicate()
