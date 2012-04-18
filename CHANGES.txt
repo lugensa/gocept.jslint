@@ -1,8 +1,8 @@
 CHANGES
 =======
 
-1.1 (unreleased)
-----------------
+1.0.1 (2012-04-18)
+------------------
 
 - Uniquify duplicate file names in a prettier way: increment a counter, don't
   just blindly append '_1' (#9454).
