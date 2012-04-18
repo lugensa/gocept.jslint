@@ -4,7 +4,8 @@ CHANGES
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Uniquify duplicate file names in a prettier way: increment a counter, don't
+  just blindly append '_1' (#9454).
 
 
 1.0 (2011-08-25)
