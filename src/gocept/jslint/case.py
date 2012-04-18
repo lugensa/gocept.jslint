@@ -52,7 +52,7 @@ class TestCase(unittest.TestCase):
 
     __metaclass__ = JSLintTestGenerator
 
-    node_js_command = 'node'
+    jshint_command = 'jshint'
 
     include = ()
     exclude = ()
@@ -71,16 +71,14 @@ class TestCase(unittest.TestCase):
 
     def __init__(self, *args, **kw):
         super(TestCase, self).__init__(*args, **kw)
-        self.node_present = gocept.jslint.util.which(self.node_js_command)
+        self.jshint_present = gocept.jslint.util.which(self.jshint_command)
 
     def _run_jslint(self, filename):
-        if not self.node_present:
+        if not self.jshint_present:
             raise unittest.SkipTest(
-                '%r not found on $PATH' % self.node_js_command)
-        jslint = pkg_resources.resource_filename(
-            'gocept.jslint.js', 'node-jslint.js')
+                '%r not found on $PATH' % self.jshint_command)
         job = subprocess.Popen(
-            [self.node_js_command, jslint] + list(self.options) + [filename],
+            [self.jshint_command] + list(self.options) + [filename],
             stdout=subprocess.PIPE)
         job.wait()
         output, error = job.communicate()
