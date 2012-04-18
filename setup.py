@@ -14,7 +14,7 @@ if sys.version_info < (2, 7):
 
 setup(
     name='gocept.jslint',
-    version='1.1dev',
+    version='1.0.1',
     author='Wolfgang Schnerring',
     author_email='ws@gocept.com',
     url='http://pypi.python.org/pypi/gocept.jslint',
