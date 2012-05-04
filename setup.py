@@ -34,10 +34,6 @@ Python-unittest integration for jslint.
     install_requires=install_requires,
     extras_require=dict(test=[
         'mock',
-        # XXX The 'jshint' wrapper this generates is too stupid and imports
-        # lots of buildout stuff that the *wrapper* does not need.
-        # Thus, we make it available on sys.path so the wrapper runs at all.
-        'gp.recipe.node',
     ]),
     entry_points=dict(console_scripts=[
         'gocept-jshint = gocept.jslint.util:run_jslint',
