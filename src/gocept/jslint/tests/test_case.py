@@ -59,7 +59,6 @@ class RunTest(unittest.TestCase):
 
         class Example(gocept.jslint.TestCase):
             include = ('gocept.jslint.tests:fixtures',)
-            options = ('--sloppy',)
 
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)

@@ -2,10 +2,12 @@
 # See also LICENSE.txt
 
 import gocept.jslint.util
+import json
 import os.path
 import pkg_resources
 import subprocess
 import sys
+import tempfile
 
 if sys.version_info < (2, 7):
     import unittest2 as unittest
@@ -57,15 +59,11 @@ class TestCase(unittest.TestCase):
     include = ()
     exclude = ()
     options = (
-        '--browser',
-        '--continue',
-        '--newcap',
-        '--nomen',
-        '--sloppy',
-        '--sub',
-        '--unparam',
-        '--vars',
-        '--white',
+        'browser',
+        'newcap',
+        'nomen',
+        'sub',
+        'white',
         )
     ignore = ()
 
@@ -77,14 +75,27 @@ class TestCase(unittest.TestCase):
         if not self.jshint_present:
             raise unittest.SkipTest(
                 '%r not found on $PATH' % self.jshint_command)
+        config = self._write_config_file()
         job = subprocess.Popen(
-            [self.jshint_command] + list(self.options) + [filename],
+            [self.jshint_command, filename, '--config', config],
             stdout=subprocess.PIPE)
         job.wait()
         output, error = job.communicate()
         output = self._filter_ignored_errors(output)
         if output:
             self.fail('JSLint %s:\n%s' % (filename, output))
+
+    def _write_config_file(self):
+        settings = {}
+        for option in self.options:
+            settings[option] = True
+
+        handle, filename = tempfile.mkstemp()
+        output = open(filename, 'w')
+        json.dump(settings, output)
+        output.close()
+
+        return filename
 
     def _filter_ignored_errors(self, output):
         result = []
