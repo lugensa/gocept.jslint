@@ -61,10 +61,7 @@ class TestCase(unittest.TestCase):
     exclude = ()
     options = (
         'browser',
-        'newcap',
-        'nomen',
         'sub',
-        'white',
         )
     ignore = ()
 
