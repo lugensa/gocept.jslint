@@ -59,10 +59,7 @@ class TestCase(unittest.TestCase):
 
     include = ()
     exclude = ()
-    options = (
-        'browser',
-        'sub',
-        )
+    options = ()
     predefined = ()
     ignore = ()
 
