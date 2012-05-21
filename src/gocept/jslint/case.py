@@ -5,6 +5,7 @@ import gocept.jslint.util
 import json
 import os.path
 import pkg_resources
+import re
 import subprocess
 import sys
 import tempfile
@@ -67,6 +68,8 @@ class TestCase(unittest.TestCase):
         )
     ignore = ()
 
+    _error_summary = re.compile('^\d+ errors?$')
+
     def __init__(self, *args, **kw):
         super(TestCase, self).__init__(*args, **kw)
         self.jshint_present = gocept.jslint.util.which(self.jshint_command)
@@ -100,6 +103,8 @@ class TestCase(unittest.TestCase):
     def _filter_ignored_errors(self, output):
         result = []
         for line in output.splitlines():
+            if self._error_summary.search(line):
+                continue
             ignore = False
             for pattern in self.ignore:
                 if pattern in line:
