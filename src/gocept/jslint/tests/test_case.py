@@ -24,11 +24,13 @@ class CollectFilesTest(unittest.TestCase):
 
         class Example(gocept.jslint.TestCase):
             include = ('gocept.jslint.tests:fixtures',
-                       'gocept.jslint.tests:fixtures/second')
+                       'gocept.jslint.tests:fixtures/second',
+                       'gocept.jslint.tests:fixtures/third')
 
         self.assertTrue(hasattr(Example, 'test_jslint_one.js'))
         self.assertTrue(hasattr(Example, 'test_jslint_two.js'))
         self.assertTrue(hasattr(Example, 'test_jslint_one.js_1'))
+        self.assertTrue(hasattr(Example, 'test_jslint_one.js_2'))
 
     def test_excluded_filenames_do_not_get_method(self):
 

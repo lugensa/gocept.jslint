@@ -27,9 +27,20 @@ class JSLintTestGenerator(type):
     @classmethod
     def _create_jslint_runner(cls, dict, filename):
         name = 'test_jslint_%s' % os.path.basename(filename)
-        if name in dict:
-            name += '_1'
+        name = cls._uniquify_name(dict, name)
         dict[name] = lambda x: x._run_jslint(filename)
+
+    @classmethod
+    def _uniquify_name(cls, dict, name):
+        if name not in dict:
+            return name
+        base = name
+        counter = 1
+        while name in dict:
+            name = '%s_%s' % (base, counter)
+            if name not in dict:
+                return name
+            counter += 1
 
     @classmethod
     def _collect_files(cls, include, exclude):
