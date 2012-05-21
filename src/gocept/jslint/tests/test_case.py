@@ -78,7 +78,7 @@ class RunTest(unittest.TestCase):
     def test_nodejs_not_available_should_skip(self):
 
         class Example(gocept.jslint.TestCase):
-            node_js_command = 'doesnotexist'
+            jshint_command = 'doesnotexist'
             include = ('gocept.jslint.tests:fixtures',)
 
         result = unittest.TestResult()
