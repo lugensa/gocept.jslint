@@ -2,12 +2,13 @@
 gocept.jslint
 =============
 
-This package integrates Douglas Crockford's JSLint tool (https://jslint.com)
-with Python's unittest module.
+This package integrates the JSHint code analysis tool (https://jshint.com) with
+Python's unittest module. (The name is left over from when JSHint didn't exist
+and only Douglas Crockford's JSHint was available.)
 
 It provides a special JSLint-TestCase class that collects JavaScript files (in
 a configurable manner) and dynamically generates a test method for each file
-that calls jslint on that file.
+that calls jshint on that file.
 
 To use it, create a test class like this::
 
@@ -16,28 +17,19 @@ To use it, create a test class like this::
         include = ('my.package.browser:js',
                    'my.package.browser:js/lib')
         options = (gocept.jslint.TestCase.options +
-                   ('--predef=jQuery',))
+                   ('browser', 'jquery',))
 
 
 ``include`` is a list of "resource paths" of the form ``packagename:path``
 (passed to pkg_resources).
 
-``options`` is a list of arguments that are passed to JSLint (see its
-`documentation`_ for details). The default value is::
+``options`` is a list of arguments that are passed to JSHint (see its
+`documentation`_ for details).
 
-    options = (
-        '--browser',
-        '--continue',
-        '--newcap',
-        '--nomen',
-        '--sloppy',
-        '--sub',
-        '--unparam',
-        '--vars',
-        '--white',
-        )
+.. _documentation: http://www.jshint.com/options/
 
-.. _documentation: http://www.jslint.com/lint.html#options
+``predefined`` is a list of global names that should be considered predefined
+(for use with the ``undef`` option).
 
 ``exclude`` can be a list of filenames (without path) that will not be
 collected.
@@ -59,17 +51,11 @@ Requirements
 gocept.jslint requires Python 2.6 or later, but is not sure to run under Python
 3.
 
-gocept.jslint uses `node.js`_ to run jslint (powered by the `jslint-reporter`_
-wrapper for the original JSLint script), so you need to have node.js (version
-0.3 or later) installed and the ``node`` binary available on your ``$PATH``.
+gocept.jslint uses `node.js`_ to run jshint, so you need to have node.js
+(version 0.3 or later) with the ``jshint`` npm module installed and the
+``jshint`` binary available on your ``$PATH``.
 
-You can customize the name of the node.js binary by setting ``node_js_command``
+You can customize the name of the jshint binary by setting ``jshint_command``
 on the TestCase.
 
-gocept.jslint also provides a command-line script to run jslint, for
-convenience. There you can customize the name of the node binary by setting the
-environment variable ``NODE_JS_COMMAND``.
-
-
 .. _node.js: http://nodejs.org/
-.. _jslint-reporter: https://github.com/FND/jslint-reporter/
