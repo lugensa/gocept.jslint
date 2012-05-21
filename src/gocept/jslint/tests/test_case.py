@@ -84,3 +84,14 @@ class RunTest(unittest.TestCase):
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)
         self.assertEqual(1, len(result.skipped))
+
+    def test_adding_predefined_variables(self):
+
+        class Example(gocept.jslint.TestCase):
+            include = ('gocept.jslint.tests:fixtures',)
+            options = ('undef',)
+            predefined = ('bar',)
+
+        result = unittest.TestResult()
+        Example('test_jslint_predefined.js').run(result)
+        self.assertEqual(0, len(result.failures))

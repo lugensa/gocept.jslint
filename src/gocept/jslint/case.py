@@ -63,6 +63,7 @@ class TestCase(unittest.TestCase):
         'browser',
         'sub',
         )
+    predefined = ()
     ignore = ()
 
     _error_summary = re.compile('^\d+ errors?$')
@@ -89,6 +90,9 @@ class TestCase(unittest.TestCase):
         settings = {}
         for option in self.options:
             settings[option] = True
+        predefined = settings['predef'] = []
+        for name in self.predefined:
+            predefined.append(name)
 
         handle, filename = tempfile.mkstemp()
         output = open(filename, 'w')
