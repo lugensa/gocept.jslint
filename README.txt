@@ -2,9 +2,9 @@
 gocept.jslint
 =============
 
-This package integrates the JSHint code analysis tool (https://jshint.com) with
+This package integrates the JSHint code analysis tool (http://jshint.com) with
 Python's unittest module. (The name is left over from when JSHint didn't exist
-and only Douglas Crockford's JSHint was available.)
+and only Douglas Crockford's JSLint was available.)
 
 It provides a special JSLint-TestCase class that collects JavaScript files (in
 a configurable manner) and dynamically generates a test method for each file
