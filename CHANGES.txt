@@ -1,10 +1,16 @@
 CHANGES
 =======
 
-1.1 (unreleased)
+1.2 (unreleased)
 ----------------
 
 - Nothing changed yet.
+
+
+1.1 (2012-05-21)
+----------------
+
+- Use jshint instead of jslint.
 
 
 1.0.1 (2012-04-18)
