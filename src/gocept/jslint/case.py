@@ -66,7 +66,7 @@ class TestCase(unittest.TestCase):
 
     __metaclass__ = JSLintTestGenerator
 
-    jshint_command = 'jshint'
+    jshint_command = os.environ.get('JSHINT_COMMAND', 'jshint')
 
     include = ()
     exclude = ()

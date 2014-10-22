@@ -4,7 +4,7 @@ CHANGES
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Get jshint command from environment (#13073).
 
 
 1.1 (2012-05-21)
