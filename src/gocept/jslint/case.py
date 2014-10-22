@@ -2,10 +2,13 @@
 # See also LICENSE.txt
 
 import gocept.jslint.util
+import json
 import os.path
 import pkg_resources
+import re
 import subprocess
 import sys
+import tempfile
 
 if sys.version_info < (2, 7):
     import unittest2 as unittest
@@ -63,35 +66,27 @@ class TestCase(unittest.TestCase):
 
     __metaclass__ = JSLintTestGenerator
 
-    node_js_command = 'node'
+    jshint_command = 'jshint'
 
     include = ()
     exclude = ()
-    options = (
-        '--browser',
-        '--continue',
-        '--newcap',
-        '--nomen',
-        '--sloppy',
-        '--sub',
-        '--unparam',
-        '--vars',
-        '--white',
-        )
+    options = ()
+    predefined = ()
     ignore = ()
+
+    _error_summary = re.compile('^\d+ errors?$')
 
     def __init__(self, *args, **kw):
         super(TestCase, self).__init__(*args, **kw)
-        self.node_present = gocept.jslint.util.which(self.node_js_command)
+        self.jshint_present = gocept.jslint.util.which(self.jshint_command)
 
     def _run_jslint(self, filename):
-        if not self.node_present:
+        if not self.jshint_present:
             raise unittest.SkipTest(
-                '%r not found on $PATH' % self.node_js_command)
-        jslint = pkg_resources.resource_filename(
-            'gocept.jslint.js', 'node-jslint.js')
+                '%r not found on $PATH' % self.jshint_command)
+        config = self._write_config_file()
         job = subprocess.Popen(
-            [self.node_js_command, jslint] + list(self.options) + [filename],
+            [self.jshint_command, filename, '--config', config],
             stdout=subprocess.PIPE)
         job.wait()
         output, error = job.communicate()
@@ -99,9 +94,26 @@ class TestCase(unittest.TestCase):
         if output:
             self.fail('JSLint %s:\n%s' % (filename, output))
 
+    def _write_config_file(self):
+        settings = {}
+        for option in self.options:
+            settings[option] = True
+        predefined = settings['predef'] = []
+        for name in self.predefined:
+            predefined.append(name)
+
+        handle, filename = tempfile.mkstemp()
+        output = open(filename, 'w')
+        json.dump(settings, output)
+        output.close()
+
+        return filename
+
     def _filter_ignored_errors(self, output):
         result = []
         for line in output.splitlines():
+            if self._error_summary.search(line):
+                continue
             ignore = False
             for pattern in self.ignore:
                 if pattern in line:

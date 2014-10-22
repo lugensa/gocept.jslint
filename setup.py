@@ -14,7 +14,7 @@ if sys.version_info < (2, 7):
 
 setup(
     name='gocept.jslint',
-    version='1.1.dev0',
+    version='1.2.dev0',
     author='Wolfgang Schnerring',
     author_email='ws@gocept.com',
     url='http://pypi.python.org/pypi/gocept.jslint',
@@ -36,6 +36,6 @@ Python-unittest integration for jslint.
         'mock',
     ]),
     entry_points=dict(console_scripts=[
-        'jslint = gocept.jslint.util:run_jslint',
+        'gocept-jshint = gocept.jslint.util:run_jslint',
     ]),
 )

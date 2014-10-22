@@ -48,20 +48,19 @@ class RunTest(unittest.TestCase):
 
         class Example(gocept.jslint.TestCase):
             include = ('gocept.jslint.tests:fixtures',)
-            options = ()
+            options = ('strict',)
 
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)
         self.assertEqual(1, len(result.failures))
         traceback = result.failures[0][1]
-        self.assertTrue(
-            "one.js:2:5:Missing 'use strict' statement" in traceback)
+        self.assertIn(
+            'one.js: line 2, col 5, Missing "use strict" statement', traceback)
 
     def test_no_jslint_error_should_pass_test(self):
 
         class Example(gocept.jslint.TestCase):
             include = ('gocept.jslint.tests:fixtures',)
-            options = ('--sloppy',)
 
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)
@@ -71,8 +70,8 @@ class RunTest(unittest.TestCase):
 
         class Example(gocept.jslint.TestCase):
             include = ('gocept.jslint.tests:fixtures',)
-            options = ()
-            ignore = ("Missing 'use strict' statement")
+            options = ('strict',)
+            ignore = ('Missing "use strict" statement',)
 
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)
@@ -81,9 +80,20 @@ class RunTest(unittest.TestCase):
     def test_nodejs_not_available_should_skip(self):
 
         class Example(gocept.jslint.TestCase):
-            node_js_command = 'doesnotexist'
+            jshint_command = 'doesnotexist'
             include = ('gocept.jslint.tests:fixtures',)
 
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)
         self.assertEqual(1, len(result.skipped))
+
+    def test_adding_predefined_variables(self):
+
+        class Example(gocept.jslint.TestCase):
+            include = ('gocept.jslint.tests:fixtures',)
+            options = ('undef',)
+            predefined = ('bar',)
+
+        result = unittest.TestResult()
+        Example('test_jslint_predefined.js').run(result)
+        self.assertEqual(0, len(result.failures))
