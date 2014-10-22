@@ -56,6 +56,6 @@ gocept.jslint uses `node.js`_ to run jshint, so you need to have node.js
 ``jshint`` binary available on your ``$PATH``.
 
 You can customize the name of the jshint binary by setting ``jshint_command``
-on the TestCase.
+on the TestCase, or set the environment variable ``JSHINT_COMMAND``.
 
 .. _node.js: http://nodejs.org/
