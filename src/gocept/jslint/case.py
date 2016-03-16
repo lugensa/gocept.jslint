@@ -20,7 +20,7 @@ class JSLintTestGenerator(type):
 
     def __new__(cls, name, bases, dict):
         for filename in cls._collect_files(
-            dict.get('include', ()), dict.get('exclude', ())):
+                dict.get('include', ()), dict.get('exclude', ())):
             cls._create_jslint_runner(dict, filename)
         return type.__new__(cls, name, bases, dict)
 
