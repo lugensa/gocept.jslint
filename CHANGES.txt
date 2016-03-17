@@ -6,6 +6,8 @@ CHANGES
 
 - Run the tests against currently most recent versions of the dependencies.
 
+- Change testrunner to py.test.
+
 
 1.1.1 (2014-10-22)
 ------------------
