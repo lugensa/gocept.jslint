@@ -2,6 +2,9 @@ syntax: glob
 
 *.egg-info
 *.pyc
+.cache
+.pytest_cache
+.coverage
 .installed.cfg
 bin
 develop-eggs
