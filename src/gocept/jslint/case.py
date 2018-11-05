@@ -74,7 +74,7 @@ class TestCase(unittest.TestCase):
     predefined = ()
     ignore = ()
 
-    _error_summary = re.compile('^\d+ errors?$')
+    _error_summary = re.compile(r'^\d+ errors?$')
 
     def __init__(self, *args, **kw):
         super(TestCase, self).__init__(*args, **kw)
