@@ -6,6 +6,7 @@ import json
 import os.path
 import pkg_resources
 import re
+import six
 import subprocess
 import sys
 import tempfile
@@ -62,9 +63,7 @@ class JSLintTestGenerator(type):
         return result
 
 
-class TestCase(unittest.TestCase):
-
-    __metaclass__ = JSLintTestGenerator
+class TestCase(six.with_metaclass(JSLintTestGenerator, unittest.TestCase)):
 
     jshint_command = os.environ.get('JSHINT_COMMAND', 'jshint')
 
@@ -112,7 +111,7 @@ class TestCase(unittest.TestCase):
     def _filter_ignored_errors(self, output):
         result = []
         for line in output.splitlines():
-            if self._error_summary.search(line):
+            if self._error_summary.search(line.decode('utf-8')):
                 continue
             ignore = False
             for pattern in self.ignore:
@@ -121,5 +120,5 @@ class TestCase(unittest.TestCase):
                     break
             if ignore:
                 continue
-            result.append(line)
+            result.append(line.decode('utf-8'))
         return '\n'.join(result)
