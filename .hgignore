@@ -3,12 +3,16 @@ syntax: glob
 *.egg-info
 *.pyc
 .cache
-.pytest_cache
 .coverage
 .installed.cfg
+.pytest_cache
+.tox
 bin
+coverage.*
 develop-eggs
+htmlcov/
 include
 lib
+lib64
 local
 parts
