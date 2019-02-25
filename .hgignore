@@ -12,6 +12,7 @@ coverage.*
 develop-eggs
 htmlcov/
 include
+junit-*.xml
 lib
 lib64
 local
