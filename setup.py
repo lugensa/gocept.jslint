@@ -13,9 +13,7 @@ setup(
     author='Wolfgang Schnerring',
     author_email='ws@gocept.com',
     url='https://bitbucket.org/gocept/gocept.jslint',
-    description="""\
-Python-unittest integration for jslint.
-""",
+    description="""Python-unittest integration for jslint.""",
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
