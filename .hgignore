@@ -8,7 +8,9 @@ syntax: glob
 .pytest_cache
 .tox
 bin
+coverage.*
 develop-eggs
+htmlcov/
 include
 lib
 lib64
