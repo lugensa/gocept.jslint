@@ -1,10 +1,12 @@
 CHANGES
 =======
 
-1.1.2 (unreleased)
-------------------
+2.0 (unreleased)
+----------------
 
 - Add support for Python 3.6 and 3.7.
+
+- Stop testing with Python 2.6.
 
 - Run the tests against currently most recent versions of the dependencies.
 

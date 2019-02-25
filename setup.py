@@ -9,7 +9,7 @@ install_requires = [
 
 setup(
     name='gocept.jslint',
-    version='1.1.2.dev0',
+    version='2.0dev0',
     author='Wolfgang Schnerring',
     author_email='ws@gocept.com',
     url='https://bitbucket.org/gocept/gocept.jslint',
