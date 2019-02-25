@@ -4,10 +4,12 @@ source = gocept.jslint
 
 [report]
 precision = 2
-omit = */interfaces.py
-       */interfaces
-       */tests/*
-       */tests.py
 
 [html]
-directory = coverage-report
+directory = htmlcov
+
+[paths]
+source =
+   src/gocept/jslint
+   .tox/*/lib/python*/site-packages/gocept/jslint
+   .tox/pypy*/site-packages/gocept/jslint

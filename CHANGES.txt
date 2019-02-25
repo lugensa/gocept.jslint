@@ -4,6 +4,8 @@ CHANGES
 1.1.2 (unreleased)
 ------------------
 
+- Add support for Python 3.6 and 3.7.
+
 - Run the tests against currently most recent versions of the dependencies.
 
 - Change testrunner to py.test.
