@@ -12,7 +12,7 @@ setup(
     version='2.1.dev0',
     author='Wolfgang Schnerring',
     author_email='ws@gocept.com',
-    url='https://bitbucket.org/gocept/gocept.jslint',
+    url='https://github.com/gocept/gocept.jslint',
     description="""Python-unittest integration for jslint.""",
     classifiers=[
         'Environment :: Web Environment',
