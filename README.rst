@@ -48,7 +48,7 @@ substrings that are matched against each JSLint output line):
 Requirements
 ============
 
-gocept.jslint is tested with Python 2.7, 3.6 and 3.7.
+gocept.jslint is tested with Python 2.7, 3.6, 3.7 and 3.8.
 
 gocept.jslint uses `node.js`_ to run jshint, so you need to have node.js
 (version 0.3 or later) with the ``jshint`` npm module installed and the
