@@ -5,6 +5,7 @@ from setuptools import setup, find_packages
 
 install_requires = [
     'setuptools',
+    'six',
 ]
 
 setup(
@@ -44,7 +45,6 @@ setup(
     namespace_packages=['gocept'],
     install_requires=install_requires,
     extras_require=dict(test=[
-        'mock',
     ]),
     entry_points=dict(console_scripts=[
         'gocept-jshint = gocept.jslint.util:run_jslint',
