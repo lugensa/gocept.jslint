@@ -6,7 +6,7 @@ CHANGES
 
 - Add support for Python 3.8.
 
-- Migrate to Github.
+- Migrate to GitHub and GitHub Actions.
 
 
 2.0 (2019-02-25)
