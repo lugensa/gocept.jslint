@@ -6,15 +6,9 @@ import json
 import os.path
 import pkg_resources
 import re
-import six
 import subprocess
-import sys
 import tempfile
-
-if sys.version_info < (2, 7):
-    import unittest2 as unittest
-else:
-    import unittest
+import unittest
 
 
 class JSLintTestGenerator(type):
@@ -38,7 +32,7 @@ class JSLintTestGenerator(type):
         base = name
         counter = 1
         while name in dict:
-            name = '%s_%s' % (base, counter)
+            name = f'{base}_{counter}'
             if name not in dict:
                 return name
             counter += 1
@@ -63,7 +57,7 @@ class JSLintTestGenerator(type):
         return result
 
 
-class TestCase(six.with_metaclass(JSLintTestGenerator, unittest.TestCase)):
+class TestCase(unittest.TestCase, metaclass=JSLintTestGenerator):
 
     jshint_command = os.environ.get('JSHINT_COMMAND', 'jshint')
 
@@ -76,7 +70,7 @@ class TestCase(six.with_metaclass(JSLintTestGenerator, unittest.TestCase)):
     _error_summary = re.compile(r'^\d+ errors?$')
 
     def __init__(self, *args, **kw):
-        super(TestCase, self).__init__(*args, **kw)
+        super().__init__(*args, **kw)
         self.jshint_present = gocept.jslint.util.which(self.jshint_command)
 
     def _run_jslint(self, filename):
@@ -91,7 +85,7 @@ class TestCase(six.with_metaclass(JSLintTestGenerator, unittest.TestCase)):
         output, error = job.communicate()
         output = self._filter_ignored_errors(output)
         if output:
-            self.fail('JSLint %s:\n%s' % (filename, output))
+            self.fail(f'JSLint {filename}:\n{output}')
 
     def _write_config_file(self):
         settings = {}

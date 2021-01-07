@@ -1,10 +1,10 @@
 CHANGES
 =======
 
-2.2 (unreleased)
+3.0 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Drop support for Python 2.
 
 
 2.1 (2021-01-07)

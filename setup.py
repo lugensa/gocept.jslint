@@ -1,18 +1,17 @@
-# Copyright (c) 2011 gocept gmbh & co. kg
+# Copyright (c) 2011-2021 gocept gmbh & co. kg
 # See also LICENSE.txt
 
 from setuptools import setup, find_packages
 
 install_requires = [
     'setuptools',
-    'six',
 ]
 
 setup(
     name='gocept.jslint',
-    version='2.2.dev0',
+    version='3.0.dev0',
     author='Wolfgang Schnerring',
-    author_email='ws@gocept.com',
+    author_email='mail@gocept.com',
     url='https://github.com/gocept/gocept.jslint',
     description="""Python-unittest integration for jslint.""",
     classifiers=[
@@ -22,8 +21,6 @@ setup(
         'License :: OSI Approved',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
@@ -43,6 +40,7 @@ setup(
     zip_safe=False,
     license='ZPL',
     namespace_packages=['gocept'],
+    python_requires='>=3.6, <4',
     install_requires=install_requires,
     extras_require=dict(test=[
     ]),
