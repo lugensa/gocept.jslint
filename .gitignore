@@ -1,5 +1,3 @@
-syntax: glob
-
 *.egg-info
 *.pyc
 .cache
@@ -9,11 +7,11 @@ syntax: glob
 .tox
 bin
 coverage.*
-develop-eggs
+develop-eggs/
 htmlcov/
-include
+include/
 junit-*.xml
-lib
-lib64
-local
-parts
+lib/
+lib64/
+local/
+parts/
