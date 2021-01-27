@@ -47,7 +47,7 @@ class JSLintTestGenerator(type):
                 if extension.lower() != '.js':
                     continue
                 files.append(pkg_resources.resource_filename(
-                        package, os.path.join(path, filename)))
+                    package, os.path.join(path, filename)))
 
         result = []
         for path in files:
