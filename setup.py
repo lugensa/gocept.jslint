@@ -1,7 +1,9 @@
 # Copyright (c) 2011-2021 gocept gmbh & co. kg
 # See also LICENSE.txt
 
-from setuptools import setup, find_packages
+from setuptools import find_packages
+from setuptools import setup
+
 
 install_requires = [
     'setuptools',
