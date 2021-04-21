@@ -104,8 +104,8 @@ class TestCase(unittest.TestCase, metaclass=JSLintTestGenerator):
 
     def _filter_ignored_errors(self, output):
         result = []
-        for line in output.splitlines():
-            if self._error_summary.search(line.decode('utf-8')):
+        for line in output.decode('utf-8').splitlines():
+            if self._error_summary.search(line):
                 continue
             ignore = False
             for pattern in self.ignore:
@@ -114,5 +114,5 @@ class TestCase(unittest.TestCase, metaclass=JSLintTestGenerator):
                     break
             if ignore:
                 continue
-            result.append(line.decode('utf-8'))
+            result.append(line)
         return '\n'.join(result)
