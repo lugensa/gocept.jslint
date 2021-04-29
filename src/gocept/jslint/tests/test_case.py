@@ -47,6 +47,7 @@ class RunTest(unittest.TestCase):
 
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)
+        self.assertFalse(result.errors)
         self.assertEqual(1, len(result.failures))
         traceback = result.failures[0][1]
         self.assertIn(
@@ -59,6 +60,7 @@ class RunTest(unittest.TestCase):
 
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)
+        self.assertFalse(result.errors)
         self.assertEqual(0, len(result.failures))
 
     def test_ignored_errors_should_pass_test(self):
@@ -70,6 +72,7 @@ class RunTest(unittest.TestCase):
 
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)
+        self.assertFalse(result.errors)
         self.assertEqual(0, len(result.failures))
 
     def test_nodejs_not_available_should_skip(self):
@@ -80,6 +83,7 @@ class RunTest(unittest.TestCase):
 
         result = unittest.TestResult()
         Example('test_jslint_one.js').run(result)
+        self.assertFalse(result.errors)
         self.assertEqual(1, len(result.skipped))
 
     def test_adding_predefined_variables(self):
@@ -91,4 +95,5 @@ class RunTest(unittest.TestCase):
 
         result = unittest.TestResult()
         Example('test_jslint_predefined.js').run(result)
+        self.assertFalse(result.errors)
         self.assertEqual(0, len(result.failures))
