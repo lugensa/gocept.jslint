@@ -11,7 +11,7 @@ install_requires = [
 
 setup(
     name='gocept.jslint',
-    version='3.0.dev0',
+    version='3.0',
     author='Wolfgang Schnerring',
     author_email='mail@gocept.com',
     url='https://github.com/gocept/gocept.jslint',
