@@ -1,5 +1,6 @@
 include *.rst
 include *.txt
+include *.yaml
 include .coveragerc
 include buildout.cfg
 include pytest.ini
