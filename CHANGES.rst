@@ -8,6 +8,9 @@ CHANGES
 
 - Add support for Python 3.9.
 
+- Fix output/encoding handling for Python 3,
+  especially regarding the ``ignore`` setting.
+
 
 2.1 (2021-01-07)
 ----------------
